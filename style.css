@@ -586,6 +586,17 @@ body {
     z-index: 1;
     transition: transform 0.4s ease;
 }
+[data-theme="light"] .menu-item i {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .theme-icon-btn {
+    color: var(--primary);
+}
+
+[data-theme="light"] .theme-icon-btn:hover {
+    color: white;
+}
 
 .menu-item:hover i {
     transform: scale(1.2);
@@ -2194,3 +2205,4 @@ footer .social-links {
     }
 
 }
+
