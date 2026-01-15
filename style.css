@@ -1807,12 +1807,10 @@ footer .social-links {
         min-height: 65px;
     }
     
-    /* HIDE EXPLORE BUTTON ON MOBILE */
-    .nav-links a.btn-explore,
-    .nav-links a[href="#home-menu"] {
+     /* HIDE EXPLORE BUTTON ON MOBILE */
+    .nav-links button.btn-contact:first-child {
         display: none !important;
     }
-    
     /* Show only Contact button */
     .nav-links {
         gap: 0.5rem;
@@ -2194,4 +2192,5 @@ footer .social-links {
     .scroll-indicator {
         display: none; /* Hide in landscape for small screens */
     }
+
 }
