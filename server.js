@@ -33,8 +33,33 @@ db.connect((err) => {
         console.log('Connected to MySQL database.');
     }
 });
+// Test database connection
+app.get('/api/test-db', (req, res) => {
+    db.query('SELECT NOW() as current_time, DATABASE() as db_name', (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            res.status(500).json({ 
+                error: 'Database connection failed',
+                message: err.message 
+            });
+        } else {
+            res.json({ 
+                success: true, 
+                data: results[0],
+                message: 'Database connected successfully!' 
+            });
+        }
+    });
+});
 
 // Routes
+app.get('/', (req, res) => {
+    res.json({ 
+        message: 'Backend API is running',
+        database: process.env.DB_NAME || 'Not connected',
+        timestamp: new Date().toISOString()
+    });
+});
 
 // Health Check
 app.get('/health', (req, res) => {
@@ -392,6 +417,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
