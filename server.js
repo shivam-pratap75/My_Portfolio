@@ -14,11 +14,15 @@ app.use(express.static('public'));
 
 // Database Connection
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    multipleStatements: true
+    host: process.env.DB_HOST || 'localhost',  // Added fallback
+    user: process.env.DB_USER || 'root',       // Added fallback
+    password: process.env.DB_PASSWORD || '',   // Added fallback
+    database: process.env.DB_NAME || 'railway', // Added fallback + correct name
+    port: process.env.DB_PORT || 3306,         // ADD THIS LINE - IMPORTANT!
+    multipleStatements: true,
+    ssl: process.env.NODE_ENV === 'production' ? {
+        rejectUnauthorized: false  // ADD THIS for Railway SSL
+    } : undefined
 });
 
 db.connect((err) => {
@@ -388,4 +392,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
