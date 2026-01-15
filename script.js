@@ -1,4 +1,4 @@
-const API_URL = '';
+const API_URL = "https://my-portfolio-backend-kcj4.onrender.com";
 let isAdmin = false;
 let adminPassword = '';
 
@@ -1063,4 +1063,5 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add('hidden');
 }
+
 
