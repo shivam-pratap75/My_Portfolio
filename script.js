@@ -2,6 +2,38 @@ const API_URL = "https://my-portfolio-backend-kcj4.onrender.com";
 let isAdmin = false;
 let adminPassword = '';
 
+
+// Test connection
+async function testBackend() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/`);
+        const data = await response.json();
+        console.log("Backend connected:", data);
+    } catch (error) {
+        console.error("Backend connection failed:", error);
+    }
+}
+
+// Example API call - update to match your portfolio endpoints
+async function fetchSkills() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/skills`);
+        const skills = await response.json();
+        return skills;
+    } catch (error) {
+        console.error("Error fetching skills:", error);
+        return [];
+    }
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', () => {
+    testBackend();
+    fetchSkills().then(skills => {
+        // Display skills
+    });
+});
+
 // Helper to escape strings for JS calls in HTML attributes
 function safeJS(str) {
     if (!str) return '';
@@ -1063,5 +1095,6 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add('hidden');
 }
+
 
 
