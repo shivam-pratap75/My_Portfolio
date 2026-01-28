@@ -450,25 +450,37 @@ async function saveProfile() {
     console.log('Profile body to save:', body);
 
     try {
+        console.log('Sending to:', `${API_URL}/profile`);
+        console.log('Admin password:', adminPassword);
+        
         const res = await fetch(`${API_URL}/profile`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword },
+            headers: { 
+                'Content-Type': 'application/json', 
+                'x-admin-password': adminPassword 
+            },
             body: JSON.stringify(body)
         });
 
+        console.log('Response status:', res.status);
+        console.log('Response ok:', res.ok);
+        
+        // Try to read response as text first
+        const responseText = await res.text();
+        console.log('Response text:', responseText);
+        
         if (res.ok) {
-            alert('Profile updated successfully!');
+            alert('✅ Profile updated successfully!');
             closeModal('profile-modal');
-            fetchProfile();
+            fetchProfile(); // Refresh data
         } else {
-            alert('Failed to update profile.');
+            alert(`❌ Failed to update profile. Status: ${res.status}\n${responseText}`);
         }
     } catch (err) {
         console.error('Error saving profile:', err);
-        alert('An error occurred while saving.');
+        alert('❌ Network error: ' + err.message);
     }
 }
-
 async function saveEducation() {
     const id = document.getElementById('education-id').value;
     const body = {
@@ -1096,6 +1108,7 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add('hidden');
 }
+
 
 
 
