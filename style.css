@@ -2206,3 +2206,19 @@ footer .social-links {
 
 }
 
+/* FIX MODAL SCROLLING */
+.modal {
+    align-items: flex-start !important;
+    padding-top: 50px !important;
+    overflow-y: auto !important;
+}
+
+.modal-content {
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    margin: 20px auto !important;
+    width: 90% !important;
+    max-width: 500px !important;
+}
+
+
